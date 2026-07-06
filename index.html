@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gincana Festa da Colheita - Colégio Príncipe da Paz</title>
+    <meta http-equiv="refresh" content="3000">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --wood: #5d4037;
+            --wheat: #f7dc6f;
+            --paper: #fdf5e6;
+            --accent-red: #c0392b;
+            --accent-blue: #2980b9;
+            --accent-green: #27ae60;
+            --text-dark: #3e2723;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #2c1b0e;
+            /* Fundo amadeirado/rústico */
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            color: var(--text-dark);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .main-container {
+            background: var(--paper);
+            width: 100%;
+            max-width: 1200px;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            border: 15px solid var(--wood);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Detalhes de Festa Julina */
+        .main-container::before {
+            content: "🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩";
+            position: absolute;
+            top: -35px;
+            left: 0;
+            width: 100%;
+            font-size: 2rem;
+            text-align: center;
+            letter-spacing: 5px;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px dashed var(--wood);
+            background: rgba(247, 220, 111, 0.2);
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: 'Kalam', cursive;
+            font-size: 3.5rem;
+            color: var(--accent-red);
+            text-shadow: 2px 2px 0px var(--wheat);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--wood);
+        }
+
+        #scoreboard {
+            flex-grow: 1;
+            padding: 20px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+        }
+
+        .team-row {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 3px solid var(--wood);
+            box-shadow: 4px 4px 0px var(--wood);
+            transition: 0.3s;
+        }
+
+        .rank {
+            font-size: 2rem;
+            font-weight: 900;
+            width: 70px;
+            color: var(--wood);
+        }
+
+        .team-name {
+            flex-grow: 1;
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: 'Kalam', cursive;
+        }
+
+        .score {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-red);
+        }
+
+        /* Cores especiais para o topo */
+        .rank-1 { background: #fff9c4; border-color: #fbc02d; transform: scale(1.02); }
+        .rank-2 { background: #f5f5f5; border-color: #9e9e9e; }
+        .rank-3 { background: #efebe9; border-color: #8d6e63; }
+
+        footer {
+            padding: 15px 30px;
+            background: var(--wood);
+            color: var(--wheat);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        /* Painel Admin (Modal) */
+        #admin-modal {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            border: 10px solid var(--wood);
+            border-radius: 20px;
+            padding: 30px;
+            z-index: 100;
+            box-shadow: 0 0 100px rgba(0,0,0,0.8);
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr 100px;
+            gap: 10px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        input {
+            padding: 10px;
+            border: 2px solid var(--wood);
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn-save { background: var(--accent-green); color: white; width: 100%; }
+        .btn-close { background: var(--accent-red); color: white; }
+
+        /* Botão invisível para abrir admin (Canto inferior direito) */
+        #admin-trigger {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0N-9T-6X0Y_p1J_p1J_p1J_p1J_p1J_p1J_p1J_p1J_p1J_p1J" alt="Colégio Príncipe da Paz" class="logo">
+            <h1>Gincana Festa da Colheita</h1>
+            <h2>Ranking de Pontuação</h2>
+        </header>
+
+        <main id="scoreboard">
+            <!-- Dados dinâmicos aqui -->
+        </main>
+
+        <footer>
+            <span>🌾 Colégio Príncipe da Paz</span>
+            <span id="timer-display">Próxima atualização em: 50:00</span>
+            <span id="last-update">Última: --:--</span>
+        </footer>
+
+        <div id="admin-trigger" onclick="showLogin()"></div>
+    </div>
+
+    <!-- Modal de Login/Edição -->
+    <div id="admin-modal">
+        <div id="login-form">
+            <h3 style="margin-bottom:15px">Acesso Restrito</h3>
+            <input type="password" id="admin-token" placeholder="GitHub Token" style="width:100%; margin-bottom:10px">
+            <input type="text" id="repo-name" placeholder="usuario/repositorio" style="width:100%; margin-bottom:15px">
+            <button class="btn btn-save" onclick="login()">Entrar</button>
+            <button class="btn btn-close" onclick="closeAdmin()" style="margin-top:10px; width:100%">Cancelar</button>
+        </div>
+
+        <div id="edit-form" style="display:none">
+            <h3 style="margin-bottom:15px">Atualizar Pontuações</h3>
+            <div id="admin-list" class="admin-grid"></div>
+            <button class="btn btn-save" id="btn-submit" onclick="saveToGithub()">Salvar no GitHub</button>
+            <button class="btn btn-close" onclick="closeAdmin()" style="margin-top:10px; width:100%">Fechar</button>
+            <p id="status-msg" style="margin-top:10px; text-align:center; font-weight:bold"></p>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+        let fileSha = null;
+
+        // Carregar dados iniciais
+        async function loadData() {
+            try {
+                const res = await fetch('data.json?t=' + Date.now());
+                currentData = await res.json();
+                renderScoreboard();
+                document.getElementById('last-update').innerText = 'Última: ' + new Date().toLocaleTimeString('pt-BR');
+            } catch (e) { console.error(e); }
+        }
+
+        function renderScoreboard() {
+            const container = document.getElementById('scoreboard');
+            const sorted = [...currentData.teams].sort((a,b) => b.score - a.score);
+            
+            container.innerHTML = sorted.map((team, i) => `
+                <div class="team-row rank-${i+1}">
+                    <div class="rank">${i+1}º</div>
+                    <div class="team-name">${team.name}</div>
+                    <div class="score">${team.score}</div>
+                </div>
+            `).join('');
+        }
+
+        // Timer de 50 minutos
+        let timeLeft = 3000;
+        setInterval(() => {
+            let min = Math.floor(timeLeft / 60);
+            let sec = timeLeft % 60;
+            document.getElementById('timer-display').innerText = `Próxima atualização em: ${min}:${sec < 10 ? '0'+sec : sec}`;
+            if (timeLeft > 0) timeLeft--;
+            else location.reload();
+        }, 1000);
+
+        // Funções Admin
+        function showLogin() { document.getElementById('admin-modal').style.display = 'block'; }
+        function closeAdmin() { document.getElementById('admin-modal').style.display = 'none'; }
+
+        async function login() {
+            const token = document.getElementById('admin-token').value;
+            const repo = document.getElementById('repo-name').value;
+            
+            try {
+                const res = await fetch(`https://api.github.com/repos/${repo}/contents/data.json`, {
+                    headers: { 'Authorization': `token ${token}` }
+                });
+                const file = await res.json();
+                fileSha = file.sha;
+                
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('edit-form').style.display = 'block';
+                renderAdminList();
+            } catch (e) { alert('Erro de login. Verifique os dados.'); }
+        }
+
+        function renderAdminList() {
+            const list = document.getElementById('admin-list');
+            list.innerHTML = currentData.teams.map((team, i) => `
+                <div style="font-weight:bold">${team.name}</div>
+                <input type="number" value="${team.score}" onchange="updateLocalScore(${i}, this.value)">
+            `).join('');
+        }
+
+        function updateLocalScore(i, val) {
+            currentData.teams[i].score = parseInt(val);
+        }
+
+        async function saveToGithub() {
+            const token = document.getElementById('admin-token').value;
+            const repo = document.getElementById('repo-name').value;
+            const status = document.getElementById('status-msg');
+            const btn = document.getElementById('btn-submit');
+
+            btn.disabled = true;
+            status.innerText = "Salvando...";
+
+            try {
+                const content = btoa(unescape(encodeURIComponent(JSON.stringify(currentData, null, 2))));
+                const res = await fetch(`https://api.github.com/repos/${repo}/contents/data.json`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: "Update scores",
+                        content: content,
+                        sha: fileSha
+                    })
+                });
+
+                if(res.ok) {
+                    const json = await res.json();
+                    fileSha = json.content.sha;
+                    status.innerText = "✅ Salvo com sucesso!";
+                    renderScoreboard();
+                } else { throw new Error(); }
+            } catch (e) {
+                status.innerText = "❌ Erro ao salvar.";
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
