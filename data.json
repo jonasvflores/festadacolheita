@@ -1,19 +1,19 @@
 {
   "teams": [
     {
-      "name": "6Âº Ano A",
+      "name": "Turma 11",
       "score": 1500
     },
     {
-      "name": "6Âº Ano B",
+      "name": "Turma 21",
       "score": 1800
     },
     {
-      "name": "7Âº Ano A",
+      "name": "Turma 31",
       "score": 500
     },
     {
-      "name": "7Âº Ano B",
+      "name": "Turma 32",
       "score": 0
     },
     {
@@ -21,27 +21,32 @@
       "score": 0
     },
     {
-      "name": "8Âº Ano B",
+      "name": "Turma 41",
       "score": 0
     },
     {
-      "name": "9Âº Ano A",
+      "name": "Turma 51",
       "score": 0
     },
     {
-      "name": "9Âº Ano B",
+      "name": "Turma 61",
       "score": 0
     },
     {
-      "name": "1Âº EM",
+      "name": "Turma 62",
       "score": 0
     },
     {
-      "name": "2Âº EM",
+      "name": "Turma 71",
       "score": 0
     },
+     {
+      "name": "Turma 81",
+      "score": 0
+    },
+    
     {
-      "name": "3Âº EM",
+      "name": "Turma 91",
       "score": 0
     }
   ]
