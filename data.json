@@ -1,47 +1,47 @@
 {
   "teams": [
     {
-      "name": "6º Ano A",
+      "name": "6Âº Ano A",
       "score": 1500
     },
     {
-      "name": "6º Ano B",
+      "name": "6Âº Ano B",
       "score": 1800
     },
     {
-      "name": "7º Ano A",
+      "name": "7Âº Ano A",
+      "score": 500
+    },
+    {
+      "name": "7Âº Ano B",
       "score": 0
     },
     {
-      "name": "7º Ano B",
+      "name": "8Âº Ano A",
       "score": 0
     },
     {
-      "name": "8º Ano A",
+      "name": "8Âº Ano B",
       "score": 0
     },
     {
-      "name": "8º Ano B",
+      "name": "9Âº Ano A",
       "score": 0
     },
     {
-      "name": "9º Ano A",
+      "name": "9Âº Ano B",
       "score": 0
     },
     {
-      "name": "9º Ano B",
+      "name": "1Âº EM",
       "score": 0
     },
     {
-      "name": "1º EM",
+      "name": "2Âº EM",
       "score": 0
     },
     {
-      "name": "2º EM",
-      "score": 0
-    },
-    {
-      "name": "3º EM",
+      "name": "3Âº EM",
       "score": 0
     }
   ]
