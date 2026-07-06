@@ -2,7 +2,7 @@
   "teams": [
     {
       "name": "Turma 11",
-      "score": 0
+      "score": null
     },
     {
       "name": "Turma 21",
@@ -10,7 +10,7 @@
     },
     {
       "name": "Turma 31",
-      "score": 0
+      "score": 480
     },
     {
       "name": "Turma 32",
